@@ -7,21 +7,7 @@
         <h5>Ciao {{ user.username }}!</h5>
         <div style="margin-top: 20px;"></div>
         <p>Ti sei appena scritto in palestra e non hai idea di quali esercizi fare? Puoi scegliere una delle schede base
-            create dai nostri Personal Trainer</p>
-        <form action="" method="post">{% csrf_token %}
-            <label for="id_schedebase" style="margin-right: 10px; margin-bottom: 10px;">Cosa vorresti
-                allenare:</label>
-            <select id="id_schedebase" name="n_schedebase">
-                <option selected disabled>Scegli</option>
-                <option value="Braccia">Braccia</option>
-                <option value="Addominali">Addominali</option>
-                <option value="Gambe">Gambe</option>
-            </select>
-            <div>
-                <input type="submit" name="n_aggiungi" value="Submit" style="border: 1px solid #ff5188;">
-            </div>
-
-        </form>
+            create dai nostri Personal Trainer vai su "New Workout"</p>
     {% else %}
         <p>You are not logged in</p>
         <a href="{% url 'login' %}">Log In</a> |

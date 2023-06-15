@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
-
 import accounts.views
+from exercises import views
 
 urlpatterns = [
     path("", accounts.views.HomePageView.as_view(), name="home"),

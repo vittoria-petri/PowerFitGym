@@ -5,6 +5,8 @@
     <h2>My workout</h2>
     <body style="margin:0">
     <div style="height: 20px"></div>
+    <form action="" method="post">
+    {% csrf_token %}
     {% for key, value in Dict.items %}
         <div style="border-radius: 20px; background: #ffe4e1; border: 2px solid #db7093; padding: 20px; width: auto; height: auto;">
             <div style="display: flex; width: 100%; flex-wrap: wrap; justify-content: left">
@@ -15,6 +17,8 @@
             <div style="display: flex; width: 100%; flex-wrap: wrap; justify-content: left;">
                 {% for dati_list in value %}
                     <div style="display: inline-block; width: 100%; flex-wrap: wrap; justify-content: left;">
+                        <input type="checkbox" id="id_exdone{{ dati_list.5 }}" name="n_exdone{{ dati_list.5 }}" {{ dati_list.6 }}>
+                        <label for="id_exdone{{ dati_list.5 }}"></label>
                         <span><b>{{ dati_list.2 }} -</b></span>
                         <span><b>{{ dati_list.0 }}</b></span>
                     </div>
@@ -27,11 +31,22 @@
                     <div style="display: flex; height: 30px; width: 100%; position: relative;"></div>
                 {% endfor %}
             </div>
-            <div style="width: 100%; text-align: right;">
-                <input type="submit" name="Submit" value="Submit" style="border: 1px solid #ff5188;">
-            </div>
+                <div style="display: flex; width: 100%; flex-wrap: wrap; justify-content: right;">
+                    <div>
+                        <span>
+                            {{ SaveResult | safe }}
+                        </span>
+                    </div>
+                    <div>
+                        <input type="submit" name="exdone{{ key }}" value="Ex Done" style="border: 1px solid #ff5188;">
+                    </div>
+                    <div style="margin-left: 20px;">
+                        <input type="submit" name="Submit{{ key }}" value="Elimina" style="border: 1px solid #ff5188;">
+                    </div>
+                </div>
         </div>
         <div style="height: 25px"></div>
     {% endfor %}
+    </form>
     </body>
 {% endblock content %}

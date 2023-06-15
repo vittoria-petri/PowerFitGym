@@ -24,6 +24,7 @@
             {% if user.is_authenticated %}
                 <li><a href="{% url 'my_workout' %}" class="nav-link px-2 link-dark">My Workout</a></li>
                 <li><a href="{% url 'article_new' %}" class="nav-link px-2 link-dark">New Workout</a></li>
+                <li><a href="{% url 'ex_done' %}" class="nav-link px-2 link-dark">Goal</a></li>
                 </ul>
                 <div class="dropdown text-end">
                     <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1"

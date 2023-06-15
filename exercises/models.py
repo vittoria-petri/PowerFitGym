@@ -11,17 +11,13 @@ class Esercizi(models.Model):
         Abdomen = "AB", _("Abdomen")
         Leg = "L", _("Leg")
 
-    class EnumCarico(models.TextChoices):
-        C10 = "C10", _("10 kg")
-        C20 = "C20", _("20 kg")
-        C30 = "C30", _("30 kg")
-
-    ExID = models.IntegerField(default=0)
+    ExID = models.IntegerField(default=0, unique=True, db_index=True)
     category = models.CharField(max_length=2, choices=EnumCategory.choices, default=EnumCategory.Arm)
     name = models.CharField(max_length=255)
-    description = models.TextField()
-    ripetizioni = models.IntegerField(default=0)
-    carico = models.TextField(choices=EnumCarico.choices, default=EnumCarico.C10)
+    description = models.TextField(max_length=255)
+    ripetizioni = models.IntegerField(default=1)
+    carico = models.IntegerField(default=0)
+    isDefault = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name
@@ -32,6 +28,7 @@ class Esercizi(models.Model):
 
 class Scheda(models.Model):
     NomeScheda = models.CharField(max_length=255)
+    isDefault = models.BooleanField(default=True)
 
     def __str__(self):
         return self.NomeScheda
@@ -39,6 +36,8 @@ class Scheda(models.Model):
 class SchedaAssign(models.Model):
     Esercizio = models.ForeignKey(Esercizi, on_delete=models.CASCADE)
     Scheda = models.ForeignKey(Scheda, on_delete=models.CASCADE)
+    Username = models.TextField(max_length=256, default="Pippo")
+    IsDone = models.BooleanField(default=False)
 
     def __str__(self):
         return self.Scheda.NomeScheda + " : " + self.Esercizio.name
@@ -49,3 +48,8 @@ class UserAssign(models.Model):
 
     def __str__(self):
         return self.User.username + " : " + self.Scheda.NomeScheda
+
+class ExUserAssign(models.Model):
+    ExRef = models.ForeignKey(Esercizi, on_delete=models.CASCADE)
+    UserRef = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    IsDone = models.BooleanField(default=False)

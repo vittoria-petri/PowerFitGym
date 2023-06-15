@@ -10,12 +10,23 @@
         <input type="text" id="id_nomescheda" name="n_nomescheda" placeholder="Inserisci nome scheda">
         <div style="margin-bottom: 4px;"><b>Seleziona gli esercizi:</b></div>
         {% for value_esercizio in lista_esercizi %}
-            <div style="margin-bottom: 5px;">
-                <input type="checkbox" id="id_selex{{ value_esercizio.3 }}"
-                       name="n_selex{{ value_esercizio.3 }}">
-                <label for="id_selex{{ value_esercizio.3 }}">
-                    {{ value_esercizio.1 }}
-                </label>
+            <div style="margin-bottom: 10px; width: 84%; display: flex; flex-wrap: wrap; justify-content: space-between">
+                <div style="width: auto; display: flex; margin-right: 80px; align-items: center">
+                    <input type="checkbox" id="id_selex{{ value_esercizio.3 }}"
+                           name="n_selex{{ value_esercizio.3 }}" style="margin-right: 10px;">
+                    <label for="id_selex{{ value_esercizio.3 }}">
+                        {{ value_esercizio.1 }}
+                    </label>
+                </div>
+                <div style="width: auto; text-align: left">
+                    Scegli numero ripetizioni:
+                    <label for="id_repetitions"></label>
+                    <input type="number" min="0" id="id_repetitions{{ value_esercizio.3 }}" name="n_repetitions{{ value_esercizio.3 }}">
+                </div>
+                <div style="width: auto; margin-right: 80px; align-items: center">
+                    <label for="id_load"></label>
+                    <input type="number" min="0" id="id_load{{ value_esercizio.3 }}" name="n_load{{ value_esercizio.3 }}" placeholder="Inserisci carico">
+                </div>
             </div>
         {% endfor %}
         <span>
@@ -23,6 +34,21 @@
         </span>
         <div style="margin-top: 20px; margin-bottom: 50px; text-align: center;">
             <input type="submit" name="Aggiungi" value="Aggiungi" style="border: 1px solid #ff5188;">
+        </div>
+    </form>
+    <h2>Se vuoi una scheda standard per iniziare</h2>
+    <div style="margin-bottom: 20px;"></div>
+    <form action="" method="post">{% csrf_token %}
+        <label for="id_schedebase" style="margin-right: 10px; margin-bottom: 10px;"><b>Cosa vorresti
+            allenare:</b></label>
+        <select id="id_schedebase" name="n_schedebase">
+            <option selected disabled>Scegli</option>
+            <option value="Braccia">Braccia</option>
+            <option value="Addominali">Addominali</option>
+            <option value="Gambe">Gambe</option>
+        </select>
+        <div style="margin-top: 20px; margin-bottom: 50px; text-align: center;">
+            <input type="submit" name="Aggiungi2" value="Aggiungi" style="border: 1px solid #ff5188;">
         </div>
     </form>
 {% endblock content %}
